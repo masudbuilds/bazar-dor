@@ -1,6 +1,8 @@
 import CategoryProductView from "@/components/category/CategoryProductView";
 import { Product } from "@/types/Product";
 
+export const instant = false;
+
 interface CategoryPageProps {
   params: Promise<{ categoryId: string }>;
 }

@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 import PriceTicker from "./PriceTicker";
 import Link from "next/link";
 import UserAuthButtons from "./UserAuthButtons";
-// import { Suspense } from "react";
+import { Suspense } from "react";
 // import { io } from "next/cache";
 
 const date = new Date().toLocaleDateString("bn-BD", {
@@ -33,8 +33,12 @@ const Header = () => {
           </Link>
         <UserAuthButtons />
       </div>
-      <Navbar />
-      <PriceTicker />
+      <Suspense fallback={<div className="h-10 border-t border-gray-100 bg-white" />}>
+        <Navbar />
+      </Suspense>
+      <Suspense fallback={<div className="h-8 border-t border-gray-100 bg-[#FAFAFA]" />}>
+        <PriceTicker />
+      </Suspense>
     </header>
   );
 };

@@ -5,6 +5,8 @@ import MarketPriceTable from "@/components/product/MarketPriceTable";
 import { Product } from "@/types/Product";
 import Link from "next/link";
 
+export const instant = false;
+
 interface ProductDetailPageProps {
   params: Promise<{ productId: string }>;
 }
