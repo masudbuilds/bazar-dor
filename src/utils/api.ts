@@ -1,5 +1,5 @@
 import { Nav } from "@/types/Nav";
-import { Product } from "@/types/PriceTacker";
+import { Product } from "@/types/Product";
 
 export const navData = async (): Promise<Nav[]> => {
   const res = await fetch(

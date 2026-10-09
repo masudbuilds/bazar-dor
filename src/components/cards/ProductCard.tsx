@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Product } from "@/types/PriceTacker";
+import { Product } from "@/types/Product";
 
 const toBengaliNumber = (num: number | string): string => {
   return String(num).replace(/[0-9]/g, (d) => "০১২৩৪৫৬৭৮৯"[Number(d)]);
