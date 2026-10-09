@@ -1,11 +1,18 @@
+"use client";
 import Image from "next/image";
-import Link from "next/link";
 
 const date = new Date().toLocaleDateString("bn-BD", {
   dateStyle: "full",
 });
 
 const HeroBanner = () => {
+  const handleScrollToProducts = () => {
+    const productsSection =
+      document.getElementById("সব-পণ্য") || document.getElementById("products");
+    if (productsSection) {
+      productsSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4">
       <section className="bg-white rounded-2xl border border-gray-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] px-6 py-8 md:px-12 md:py-10 flex flex-col md:flex-row items-center justify-between gap-8">
@@ -30,12 +37,16 @@ const HeroBanner = () => {
 
           {/* CTA Button */}
           <div className="pt-2">
-            <Link
+            <a
               href="#সব-পণ্য"
-              className="inline-flex items-center justify-center bg-[#15803D] hover:bg-[#166534] text-white text-sm font-semibold px-6 py-2.5 rounded-lg transition-colors shadow-sm"
+              onClick={(e) => {
+                e.preventDefault();
+                handleScrollToProducts();
+              }}
+              className="inline-flex items-center justify-center bg-[#15803D] hover:bg-[#166534] active:scale-95 text-white text-sm font-semibold px-6 py-2.5 rounded-lg transition-all shadow-sm cursor-pointer"
             >
               সব পণ্য দেখুন
-            </Link>
+            </a>
           </div>
         </div>
 
