@@ -29,7 +29,7 @@ const PriceTicker = async () => {
   );
 
   return (
-    <div className="border-t border-b border-gray-100 overflow-hidden text-xs">
+    <div className="border-t  border-gray-200 bg-gray-50 overflow-hidden text-xs">
       <MarqueeText direction="right" duration={35} className="py-2.5">
         {movingProducts.map((price) => {
           const isUp = price.change.dir === "up" || price.change.pct > 0;
