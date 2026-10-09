@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Hind_Siliguri } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/common/Header";
+import Header from "@/components/common/header/Header";
 
 const hindSiliguri = Hind_Siliguri({
   weight: ["400", "500", "600", "700"],

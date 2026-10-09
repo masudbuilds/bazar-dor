@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Navbar from "./Navbar";
 // import { Suspense } from "react";
 // import { io } from "next/cache";
 
@@ -8,8 +9,8 @@ const date = new Date().toLocaleDateString("bn-BD", {
 
 const Header = () => {
   return (
-    <header className="bg-white p-4 border-b border-gray-200">
-      <div className="flex justify-between items-center max-w-7xl mx-auto">
+    <header className="bg-white pt-3 border-b border-gray-200">
+      <div className="flex justify-between items-center max-w-7xl mx-auto pb-2">
         <div className="flex items-center gap-2">
           <Image
             className="rounded-lg bg-green-700 w-12 h-12 p-2"
@@ -31,6 +32,7 @@ const Header = () => {
           <button className="btn  bg-green-600 text-white">সাইন আপ</button>
         </div>
       </div>
+      <Navbar />
     </header>
   );
 };
