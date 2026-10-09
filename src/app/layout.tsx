@@ -19,7 +19,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       data-theme="light"
       lang="bn"
-      className={`${hindSiliguri.className} h-full antialiased`}
+      className={`${hindSiliguri.className} h-full antialiased scroll-smooth`}
     >
       <body className="min-h-full flex flex-col bg-gray-100">
         <Header />
