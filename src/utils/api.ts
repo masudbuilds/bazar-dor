@@ -1,5 +1,5 @@
 import { Nav } from "@/types/Nav";
-import { PriceTacker } from "@/types/PriceTacker";
+import { Product } from "@/types/PriceTacker";
 
 export const navData = async (): Promise<Nav[]> => {
   const res = await fetch(
@@ -17,7 +17,7 @@ export const navData = async (): Promise<Nav[]> => {
   return data;
 };
 
-export const priceTrackerData = async (): Promise<PriceTacker[]> => {
+export const productData = async (): Promise<Product[]> => {
   const res = await fetch(
     "https://api.abcz.workers.dev/api/bazardor/products",
     {

@@ -1,7 +1,7 @@
 import MarqueeText from "react-marquee-text";
 import "react-marquee-text/dist/styles.css";
 
-import { priceTrackerData } from "@/utils/api";
+import { productData } from "@/utils/api";
 
 const toBengaliNumber = (num: number | string): string => {
   return String(num).replace(/[0-9]/g, (d) => "০১২৩৪৫৬৭৮৯"[Number(d)]);
@@ -23,13 +23,13 @@ const getUnitText = (unit: string): string => {
 };
 
 const PriceTicker = async () => {
-  const priceData = await priceTrackerData();
+  const priceData = await productData();
   const movingProducts = priceData.filter(
     (product) => product.change.pct !== 0 && product.change.dir !== "flat"
   );
 
   return (
-    <div className="border-t  border-gray-200 bg-gray-50 overflow-hidden text-xs">
+    <div className="border-t  border-gray-200 overflow-hidden text-xs">
       <MarqueeText direction="right" duration={35} className="py-2.5">
         {movingProducts.map((price) => {
           const isUp = price.change.dir === "up" || price.change.pct > 0;

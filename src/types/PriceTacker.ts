@@ -1,4 +1,4 @@
-export interface PriceTacker {
+export interface Product {
   id: number;
   slug: string;
   nameBn: string;
