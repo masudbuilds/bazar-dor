@@ -14,16 +14,16 @@ const CategoryProducts = async ({ params }: CategoryPageProps) => {
   try {
     const [catRes, productsRes] = await Promise.all([
       fetch(
-        `https://api.abcz.workers.dev/api/bazardor/categories/${categoryId}`,
+        `https://api.api-store.workers.dev/api/bazardor/categories/${categoryId}`,
         {
           next: { revalidate: 3600 },
-        }
+        },
       ),
       fetch(
-        `https://api.abcz.workers.dev/api/bazardor/products?category=${categoryId}`,
+        `https://api.api-store.workers.dev/api/bazardor/products?category=${categoryId}`,
         {
           next: { revalidate: 3600 },
-        }
+        },
       ),
     ]);
 

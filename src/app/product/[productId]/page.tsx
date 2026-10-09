@@ -21,10 +21,10 @@ const ProductDetailPage = async ({ params }: ProductDetailPageProps) => {
     if (!isNumeric) {
       // Find id from slug
       const allRes = await fetch(
-        "https://api.abcz.workers.dev/api/bazardor/products",
+        "https://api.api-store.workers.dev/api/bazardor/products",
         {
           next: { revalidate: 3600 },
-        }
+        },
       );
       if (allRes.ok) {
         const allProducts: Product[] = await allRes.json();
@@ -36,10 +36,10 @@ const ProductDetailPage = async ({ params }: ProductDetailPageProps) => {
     }
 
     const res = await fetch(
-      `https://api.abcz.workers.dev/api/bazardor/products/${targetId}`,
+      `https://api.api-store.workers.dev/api/bazardor/products/${targetId}`,
       {
         next: { revalidate: 3600 },
-      }
+      },
     );
 
     if (res.ok) {
