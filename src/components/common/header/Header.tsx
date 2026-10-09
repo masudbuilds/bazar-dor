@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Navbar from "./Navbar";
 import PriceTicker from "./PriceTicker";
+import Link from "next/link";
 // import { Suspense } from "react";
 // import { io } from "next/cache";
 
@@ -12,22 +13,23 @@ const Header = () => {
   return (
     <header className="bg-white pt-3 border-b border-gray-200">
       <div className="flex justify-between items-center max-w-7xl mx-auto pb-2">
-        <div className="flex items-center gap-2">
-          <Image
-            className="rounded-lg bg-green-700 w-12 h-12 p-2"
-            src="/logo-icon.png"
-            alt="বাজার দর"
-            width={50}
-            height={50}
-            priority
-          />
-          <div>
-            <div className="text-2xl font-bold">বাজার দর</div>
+          <Link 
+          href="/" className="flex items-center gap-2">
+            <Image
+              className="rounded-lg bg-green-700 w-12 h-12 p-2"
+              src="/logo-icon.png"
+              alt="বাজার দর"
+              width={50}
+              height={50}
+              priority
+            />
             <div>
-              <span className="text-xs text-gray-600">{date}</span>
+              <div className="text-2xl font-bold">বাজার দর</div>
+              <div>
+                <span className="text-xs text-gray-600">{date}</span>
+              </div>
             </div>
-          </div>
-        </div>
+          </Link>
         <div>
           <button className="btn btn-ghost">সাইন ইন</button>
           <button className="btn  bg-green-600 text-white">সাইন আপ</button>
