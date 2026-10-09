@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Navbar from "./Navbar";
+import PriceTicker from "./PriceTicker";
 // import { Suspense } from "react";
 // import { io } from "next/cache";
 
@@ -33,6 +34,7 @@ const Header = () => {
         </div>
       </div>
       <Navbar />
+      <PriceTicker />
     </header>
   );
 };

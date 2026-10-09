@@ -3,7 +3,6 @@ import Link from "next/link";
 
 const Navbar = async () => {
   const navs = await navData();
-  console.log("navs", navs);
   return (
     <div className="border-t border-gray-100">
       <div className="flex flex-wrap gap-8 max-w-7xl mx-auto p-2">
