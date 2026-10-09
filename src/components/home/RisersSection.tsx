@@ -4,9 +4,9 @@ import ProductCard from "../cards/ProductCard";
 const RisersSection = async () => {
   const products = await productData();
 
-  const risers = products
-    .filter((p) => p.change.dir === "up" || p.change.pct > 0)
-    .sort((a, b) => b.change.pct - a.change.pct)
+  const risers = (products || [])
+    .filter((p) => p && p.change && (p.change.dir === "up" || p.change.pct > 0))
+    .sort((a, b) => (b.change?.pct || 0) - (a.change?.pct || 0))
     .slice(0, 6);
 
   return (

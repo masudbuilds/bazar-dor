@@ -24,8 +24,12 @@ const getUnitText = (unit: string): string => {
 
 const PriceTicker = async () => {
   const priceData = await productData();
-  const movingProducts = priceData.filter(
-    (product) => product.change.pct !== 0 && product.change.dir !== "flat"
+  const movingProducts = (priceData || []).filter(
+    (product) =>
+      product &&
+      product.change &&
+      product.change.pct !== 0 &&
+      product.change.dir !== "flat"
   );
 
   return (

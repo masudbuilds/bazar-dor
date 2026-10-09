@@ -4,9 +4,9 @@ import ProductCard from "../cards/ProductCard";
 const FallersSection = async () => {
   const products = await productData();
   
-  const fallers = products
-    .filter((p) => p.change.dir === "down" || p.change.pct < 0)
-    .sort((a, b) => a.change.pct - b.change.pct)
+  const fallers = (products || [])
+    .filter((p) => p && p.change && (p.change.dir === "down" || p.change.pct < 0))
+    .sort((a, b) => (a.change?.pct || 0) - (b.change?.pct || 0))
     .slice(0, 6);
 
   return (

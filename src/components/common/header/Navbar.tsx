@@ -11,7 +11,7 @@ const Navbar = async () => {
       <Suspense
         fallback={
           <div className="flex flex-wrap items-center gap-2 sm:gap-3 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
-            {navs.map((nav) => (
+            {(navs || []).map((nav) => (
               <Link
                 key={nav.id}
                 href={`/category/${nav.slug}`}

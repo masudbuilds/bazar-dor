@@ -25,10 +25,11 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
-  const isUp = product.change.dir === "up" || product.change.pct > 0;
-  const isDown = product.change.dir === "down" || product.change.pct < 0;
+  const change = product.change || { dir: "flat", pct: 0 };
+  const isUp = change.dir === "up" || change.pct > 0;
+  const isDown = change.dir === "down" || change.pct < 0;
   const isFlat = !isUp && !isDown;
-  const absPct = Math.abs(product.change.pct);
+  const absPct = Math.abs(change.pct || 0);
 
   return (
     <Link
