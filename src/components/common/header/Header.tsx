@@ -2,6 +2,7 @@ import Image from "next/image";
 import Navbar from "./Navbar";
 import PriceTicker from "./PriceTicker";
 import Link from "next/link";
+import UserAuthButtons from "./UserAuthButtons";
 // import { Suspense } from "react";
 // import { io } from "next/cache";
 
@@ -30,10 +31,7 @@ const Header = () => {
               </div>
             </div>
           </Link>
-        <div>
-          <button className="btn btn-ghost">সাইন ইন</button>
-          <button className="btn  bg-green-600 text-white">সাইন আপ</button>
-        </div>
+        <UserAuthButtons />
       </div>
       <Navbar />
       <PriceTicker />
