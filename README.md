@@ -140,15 +140,6 @@ bazar-dor/
 
 ---
 
-## Contributions
-Contributions are welcome!
-
-| Name            | Role                | Contributions                            |  
-|-----------------|---------------------|------------------------------------------|  
-| Masud Rana      | Lead Developer      | Architecture, Fullstack Development, UI/UX |  
-
----
-
 ## How to Contribute
 
   - Fork the Project
@@ -156,11 +147,6 @@ Contributions are welcome!
   - Commit changes (`git commit -m 'Add some AmazingFeature'`)
   - Push the branch (`git push origin feature/AmazingFeature`)
   - Open a Pull Request
-
----
-
-## License
-Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
 
