@@ -1,5 +1,6 @@
 import CategoryProductView from "@/components/category/CategoryProductView";
 import { Product } from "@/types/Product";
+import { categoryData, categoryProducts } from "@/utils/api";
 
 export const instant = false;
 
@@ -14,23 +15,12 @@ const CategoryProducts = async ({ params }: CategoryPageProps) => {
   let categoryInfo = null;
 
   try {
-    const [catRes, productsRes] = await Promise.all([
-      fetch(
-        `https://api.api-store.workers.dev/api/bazardor/categories/${categoryId}`,
-        {
-          next: { revalidate: 3600 },
-        },
-      ),
-      fetch(
-        `https://api.api-store.workers.dev/api/bazardor/products?category=${categoryId}`,
-        {
-          next: { revalidate: 3600 },
-        },
-      ),
+    const [catData, prods] = await Promise.all([
+      categoryData(categoryId),
+      categoryProducts(categoryId),
     ]);
 
-    const catData = catRes.ok ? await catRes.json() : null;
-    products = productsRes.ok ? await productsRes.json() : [];
+    products = prods || [];
 
     categoryInfo =
       catData && catData.nameBn

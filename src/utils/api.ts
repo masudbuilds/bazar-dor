@@ -1,34 +1,48 @@
 import { Nav } from "@/types/Nav";
 import { Product } from "@/types/Product";
 
-export const navData = async (): Promise<Nav[]> => {
-  const res = await fetch(
-    "https://api.api-store.workers.dev/api/bazardor/categories",
-    {
+const BASE_URL_1 = "https://api.abcz.workers.dev/api/bazardor";
+const BASE_URL_2 = "https://api.api-store.workers.dev/api/bazardor";
+
+// ১ নম্বর API ট্রাই করবে, সমস্যা হলে ২ নম্বর API থেকে ডেটা আনবে
+const fetchApi = async (endpoint: string) => {
+  try {
+    const res1 = await fetch(`${BASE_URL_1}${endpoint}`, {
       next: { revalidate: 3600 },
-    },
-  );
+    });
+    if (res1.ok) return await res1.json();
+  } catch {}
 
-  if (!res.ok) {
-    return [];
-  }
+  try {
+    const res2 = await fetch(`${BASE_URL_2}${endpoint}`, {
+      next: { revalidate: 3600 },
+    });
+    if (res2.ok) return await res2.json();
+  } catch {}
 
-  const data = await res.json();
-  return data;
+  return null;
+};
+
+export const navData = async (): Promise<Nav[]> => {
+  return (await fetchApi("/categories")) || [];
 };
 
 export const productData = async (): Promise<Product[]> => {
-  const res = await fetch(
-    "https://api.api-store.workers.dev/api/bazardor/products",
-    {
-      next: { revalidate: 3600 },
-    },
-  );
+  return (await fetchApi("/products")) || [];
+};
 
-  if (!res.ok) {
-    return [];
-  }
+export const categoryData = async (categoryId: string) => {
+  return await fetchApi(`/categories/${categoryId}`);
+};
 
-  const data = await res.json();
-  return data;
+export const categoryProducts = async (
+  categoryId: string
+): Promise<Product[]> => {
+  return (await fetchApi(`/products?category=${categoryId}`)) || [];
+};
+
+export const singleProduct = async (
+  productId: string
+): Promise<Product | null> => {
+  return await fetchApi(`/products/${productId}`);
 };

@@ -3,6 +3,7 @@ import ProductHeader from "@/components/product/ProductHeader";
 import PriceSummary from "@/components/product/PriceSummary";
 import MarketPriceTable from "@/components/product/MarketPriceTable";
 import { Product } from "@/types/Product";
+import { productData, singleProduct } from "@/utils/api";
 import Link from "next/link";
 
 export const instant = false;
@@ -22,31 +23,14 @@ const ProductDetailPage = async ({ params }: ProductDetailPageProps) => {
 
     if (!isNumeric) {
       // Find id from slug
-      const allRes = await fetch(
-        "https://api.api-store.workers.dev/api/bazardor/products",
-        {
-          next: { revalidate: 3600 },
-        },
-      );
-      if (allRes.ok) {
-        const allProducts: Product[] = await allRes.json();
-        const matched = allProducts.find((p) => p.slug === productId);
-        if (matched) {
-          targetId = String(matched.id);
-        }
+      const allProducts = await productData();
+      const matched = allProducts.find((p) => p.slug === productId);
+      if (matched) {
+        targetId = String(matched.id);
       }
     }
 
-    const res = await fetch(
-      `https://api.api-store.workers.dev/api/bazardor/products/${targetId}`,
-      {
-        next: { revalidate: 3600 },
-      },
-    );
-
-    if (res.ok) {
-      product = await res.json();
-    }
+    product = await singleProduct(targetId);
   } catch (error) {
     console.error("Failed to fetch product:", error);
     product = null;
