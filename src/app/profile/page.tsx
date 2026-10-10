@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -10,18 +9,6 @@ import { authClient } from "@/lib/auth-client";
 const ProfilePage = () => {
   const router = useRouter();
   const { data: session, isPending } = authClient.useSession();
-  const [name, setName] = useState<string | null>(null);
-  const [isUpdating, setIsUpdating] = useState(false);
-
-  useEffect(() => {
-    if (!isPending && !session?.user) {
-      toast.error("প্রোফাইল দেখতে অনুগ্রহ করে সাইন ইন করুন");
-      router.push("/sign-in");
-    }
-  }, [session, isPending, router]);
-
-  // Derived current name value so no setState inside useEffect
-  const currentName = name !== null ? name : session?.user?.name || "";
 
   const handleSignOut = async () => {
     try {
@@ -34,36 +21,6 @@ const ProfilePage = () => {
     }
   };
 
-  const handleUpdate = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!currentName.trim()) {
-      toast.error("অনুগ্রহ করে আপনার নাম প্রদান করুন");
-      return;
-    }
-
-    setIsUpdating(true);
-
-    try {
-      const { error } = await authClient.updateUser({
-        name: currentName.trim(),
-      });
-
-      if (error) {
-        toast.error(error.message || "তথ্য আপডেট করা যায়নি");
-        setIsUpdating(false);
-        return;
-      }
-
-      toast.success("তথ্য সফলভাবে আপডেট করা হয়েছে!");
-      setIsUpdating(false);
-      router.refresh();
-    } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "কোনো সমস্যা হয়েছে";
-      toast.error(message);
-      setIsUpdating(false);
-    }
-  };
 
   if (isPending) {
     return (
@@ -140,35 +97,6 @@ const ProfilePage = () => {
             <span>সাইন আউট</span>
           </button>
         </div>
-      </div>
-
-      {/* 2. Update Information Card ("তথ্য") */}
-      <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-[0_2px_12px_rgba(0,0,0,0.02)] space-y-4">
-        <h3 className="text-base font-bold text-gray-900">তথ্য</h3>
-
-        <form onSubmit={handleUpdate} className="space-y-4">
-          <div>
-            <label className="block text-xs font-semibold text-gray-700 mb-1.5">
-              নাম
-            </label>
-            <input
-              type="text"
-              value={currentName}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="আপনার নাম"
-              required
-              className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-800 focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600 transition-all"
-            />
-          </div>
-
-          <button
-            type="submit"
-            disabled={isUpdating}
-            className="w-full bg-[#15803D] hover:bg-[#166534] disabled:opacity-70 text-white font-semibold py-2.5 rounded-xl text-sm transition-all shadow-sm cursor-pointer"
-          >
-            {isUpdating ? "আপডেট হচ্ছে..." : "আপডেট"}
-          </button>
-        </form>
       </div>
     </div>
   );
