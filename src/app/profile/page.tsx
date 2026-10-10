@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { authClient } from "@/lib/auth-client";
@@ -123,13 +124,22 @@ const ProfilePage = () => {
           </div>
         </div>
 
-        <button
-          onClick={handleSignOut}
-          className="inline-flex items-center justify-center gap-2 px-4 py-2 border border-rose-200 text-rose-600 hover:bg-rose-50 rounded-xl text-xs sm:text-sm font-semibold transition-colors cursor-pointer self-start sm:self-auto"
-        >
-          <span>↩</span>
-          <span>সাইন আউট</span>
-        </button>
+        <div className="flex items-center gap-3 self-start sm:self-auto flex-wrap">
+          <Link
+            href="/profile/update"
+            className="inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-[#15803D] hover:bg-[#166534] text-white rounded-xl text-xs sm:text-sm font-semibold transition-colors shadow-sm"
+          >
+            <span>✏️</span>
+            <span>তথ্য আপডেট করুন</span>
+          </Link>
+          <button
+            onClick={handleSignOut}
+            className="inline-flex items-center justify-center gap-2 px-4 py-2 border border-rose-200 text-rose-600 hover:bg-rose-50 rounded-xl text-xs sm:text-sm font-semibold transition-colors cursor-pointer"
+          >
+            <span>↩</span>
+            <span>সাইন আউট</span>
+          </button>
+        </div>
       </div>
 
       {/* 2. Update Information Card ("তথ্য") */}

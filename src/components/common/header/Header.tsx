@@ -13,7 +13,7 @@ const date = new Date().toLocaleDateString("bn-BD", {
 const Header = () => {
   return (
     <header className="bg-white pt-3 border-b border-gray-200">
-      <div className="flex justify-between items-center max-w-7xl mx-auto pb-2">
+      <div className="flex justify-between items-center max-w-7xl mx-auto pb-2 px-4 sm:px-6 lg:px-8">
           <Link 
           href="/" className="flex items-center gap-2">
             <Image
