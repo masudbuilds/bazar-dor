@@ -1,27 +1,18 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { authClient } from "@/lib/auth-client";
 
-const SignInForm = () => {
+export default function SignInPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/";
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    if (searchParams.get("callbackUrl")) {
-      toast.error("বিস্তারিত তথ্য দেখতে অনুগ্রহ করে প্রথমে সাইন ইন করুন", {
-        id: "protected-route-notice",
-      });
-    }
-  }, [searchParams]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,7 +37,7 @@ const SignInForm = () => {
       }
 
       toast.success("সফলভাবে লগইন হয়েছে!");
-      router.push(callbackUrl);
+      router.push("/");
       router.refresh();
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : "কোনো সমস্যা হয়েছে";
@@ -59,7 +50,7 @@ const SignInForm = () => {
     try {
       await authClient.signIn.social({
         provider,
-        callbackURL: callbackUrl,
+        callbackURL: "/",
       });
     } catch {
       toast.error(`${provider} লগইন শুরু করা যায়নি`);
@@ -199,17 +190,3 @@ const SignInForm = () => {
     </div>
   );
 };
-
-export default function SignInPage() {
-  return (
-    <Suspense
-      fallback={
-        <div className="min-h-[calc(100vh-220px)] flex justify-center items-center">
-          <div className="w-8 h-8 border-4 border-green-600 border-t-transparent rounded-full animate-spin" />
-        </div>
-      }
-    >
-      <SignInForm />
-    </Suspense>
-  );
-}

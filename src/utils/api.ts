@@ -3,8 +3,9 @@ import { Product } from "@/types/Product";
 
 const BASE_URL_1 = "https://api.abcz.workers.dev/api/bazardor";
 const BASE_URL_2 = "https://api.api-store.workers.dev/api/bazardor";
+const BASE_URL_3 = "https://openapi.programming-hero.com/api/bazardor";
 
-// ১ নম্বর API ট্রাই করবে, সমস্যা হলে ২ নম্বর API থেকে ডেটা আনবে
+
 const fetchApi = async (endpoint: string) => {
   try {
     const res1 = await fetch(`${BASE_URL_1}${endpoint}`, {
@@ -18,6 +19,12 @@ const fetchApi = async (endpoint: string) => {
       next: { revalidate: 3600 },
     });
     if (res2.ok) return await res2.json();
+  } catch {}
+  try {
+    const res3 = await fetch(`${BASE_URL_3}${endpoint}`, {
+      next: { revalidate: 3600 },
+    });
+    if (res3.ok) return await res3.json();
   } catch {}
 
   return null;
